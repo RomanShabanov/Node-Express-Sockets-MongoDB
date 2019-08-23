@@ -1,0 +1,55 @@
+{
+  "name": "nodeapi",
+  "version": "1.0.0",
+  "description": "Node.js Boilerplate: Express + MongoDB + Typescript + Socket.IO",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon",
+    "clean": "rimraf ./build/* && rimraf ./logs/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RomanShabanov/Node-Express-Sockets-MongoDB.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Boilerplate",
+    "Express",
+    "Mongo",
+    "MongoDB",
+    "Sockets",
+    "Sockets.IO",
+    "Websockets"
+  ],
+  "author": "Roman Shabanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RomanShabanov/Node-Express-Sockets-MongoDB/issues"
+  },
+  "homepage": "https://github.com/RomanShabanov/Node-Express-Sockets-MongoDB#readme",
+  "dependencies": {
+    "@types/body-parser": "^1.17.1",
+    "@types/express": "^4.17.1",
+    "@types/jest": "^24.0.18",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.10",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.5.13",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "pm2": "^3.5.1",
+    "rimraf": "^3.0.0",
+    "supertest": "^4.0.2",
+    "tslint-consistent-codestyle": "^1.15.1",
+    "tslint-defocus": "^2.0.6",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-origin-ordered-imports-rule": "^1.2.2",
+    "typescript": "^3.5.3"
+  }
+}
