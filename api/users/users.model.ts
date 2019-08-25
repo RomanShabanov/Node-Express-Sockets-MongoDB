@@ -1,15 +1,31 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-export interface IUser extends Document {
+export interface IUserDocument extends Document {
   email: string;
   firstName: string;
   lastName: string;
+  password: string;
 }
 
-const UserSchema: Schema = new Schema({
+export interface IUser extends IUserDocument {
+  comparePassword(password: string): boolean;
+}
+
+export interface IUserModel extends Model<IUser> {
+  hashPassword(password: string): string;
+  statics?: any;
+}
+
+const userSchema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
   firstName: { type: String, required: true },
-  lastName: { type: String, required: true }
+  lastName: { type: String, required: true },
+  password: { type: String, required: true, unique: true }
 });
 
-export default mongoose.model<IUser>("User", UserSchema);
+export const User: IUserModel = mongoose.model<IUser, IUserModel>(
+  "User",
+  userSchema
+);
+
+export default User;

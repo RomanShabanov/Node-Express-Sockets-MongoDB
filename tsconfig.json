@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
     "noImplicitAny": true,
-    "target": "es5",
-    "outDir": "./build/",
+    "moduleResolution": "node",
     "sourceMap": true,
-    "allowJs": true
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    }
   },
-  "include": ["api/**/*"],
-  "exclude": ["node_modules", "**/*.tests.ts"]
+  "include": ["api/**/*"]
 }

@@ -1,4 +1,4 @@
-module.exports = {
-  PORT: 5000,
-  DB: "mongodb://localhost:27017/e-commerce"
-};
+require("dotenv").config();
+
+export const MONGODB_URI = process.env.MONGODB_URI;
+export const PORT = 5000;

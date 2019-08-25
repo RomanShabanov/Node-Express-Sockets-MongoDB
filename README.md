@@ -1,4 +1,4 @@
-# Node-Express-Sockets-MongoDB
+# Node.js Boilerplate: Express + MongoDB + Typescript + Socket.IO + pm2
 
 ## DAO
 

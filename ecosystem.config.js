@@ -3,6 +3,7 @@ module.exports = {
     {
       name: "Rest API",
       script: "./server.ts",
+      interpreter: "tsc",
       watch: true,
       ignore_watch: ["node_modules"],
       exp_backoff_restart_delay: 100,

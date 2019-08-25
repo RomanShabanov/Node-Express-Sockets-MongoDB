@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 import User, { IUser } from "./users.model";
+import { MONGODB_URI } from "../../config/variables";
 
 describe("User model", () => {
   beforeAll(async () => {
-    await mongoose.connect(global.__MONGO_URI__, {
+    await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true
     });
   });
