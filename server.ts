@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction, Application } from "express";
 import bodyParser from "body-parser";
-
+import { expressLogger } from "./utils/logger";
 import { PORT } from "./config/variables";
 
 import "./config/database";
@@ -11,6 +11,7 @@ const bodyParserURLEncoded = bodyParser.urlencoded({ extended: true });
 
 app.use(bodyParserJSON);
 app.use(bodyParserURLEncoded);
+app.use(expressLogger);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -26,6 +27,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
+
+import userRotes from "./api/users/users.routes";
+app.use("/v1/users", userRotes);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}.`);
