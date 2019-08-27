@@ -48,6 +48,7 @@
     "chai": "^4.2.0",
     "concurrently": "^4.1.2",
     "mocha": "^6.2.0",
+    "mongodb-memory-server": "^5.2.0",
     "nodemon": "^1.19.1",
     "pm2": "^3.5.1",
     "rimraf": "^3.0.0",

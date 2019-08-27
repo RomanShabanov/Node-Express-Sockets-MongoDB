@@ -29,8 +29,6 @@ describe("User model", () => {
     });
     const spy = jest.spyOn(user, "save");
 
-    // Should await so the teardown doesn't throw an exception
-    // Thanks @briosheje
     user.save();
 
     expect(spy).toHaveBeenCalled();

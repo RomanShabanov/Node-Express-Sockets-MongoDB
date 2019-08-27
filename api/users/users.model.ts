@@ -1,31 +1,21 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Document, Types } from "mongoose";
+import { IPet } from "../pets/pets.model";
 
-export interface IUserDocument extends Document {
+export interface IUser extends Document {
   email: string;
   firstName: string;
   lastName: string;
   password: string;
+  pets: Types.DocumentArray<IPet>;
 }
 
-export interface IUser extends IUserDocument {
-  comparePassword(password: string): boolean;
-}
-
-export interface IUserModel extends Model<IUser> {
-  hashPassword(password: string): string;
-  statics?: any;
-}
-
-const userSchema: Schema = new Schema({
+export const userSchema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   password: { type: String, required: true, unique: true }
 });
 
-export const User: IUserModel = mongoose.model<IUser, IUserModel>(
-  "User",
-  userSchema
-);
+const User = mongoose.model<IUser>("User", userSchema);
 
 export default User;

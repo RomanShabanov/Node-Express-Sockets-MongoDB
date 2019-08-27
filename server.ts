@@ -1,16 +1,18 @@
-import express from "express";
+import express, { Request, Response, NextFunction, Application } from "express";
 import bodyParser from "body-parser";
 
 import { PORT } from "./config/variables";
 
-const app: express.Application = express();
+import "./config/database";
+
+const app: Application = express();
 const bodyParserJSON = bodyParser.json();
 const bodyParserURLEncoded = bodyParser.urlencoded({ extended: true });
 
 app.use(bodyParserJSON);
 app.use(bodyParserURLEncoded);
 
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
@@ -21,7 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req: any, res: any) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
