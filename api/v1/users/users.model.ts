@@ -28,27 +28,28 @@ userSchema.method("comparePassword", function(password: string): boolean {
   return false;
 });
 
-userSchema.static("hashPassword", (password: string): string => {
+userSchema.pre<IUser>("save", function(next) {
+  const user = this;
+
+  if (!user.isModified("password")) return next();
   const saltRounds = 10;
-  return bcrypt.hashSync(password, saltRounds);
+
+  bcrypt.hash(user.password, saltRounds, (err, hash) => {
+    if (err) return next(err);
+
+    user.password = hash;
+    next();
+  });
 });
 
 const User = mongoose.model<IUser, IUserModel>("User", userSchema);
 
-User.find().then(users => {
-  if (!users.length) {
-    const password = User.hashPassword("Test123");
+const changeStream = User.watch();
 
-    const user = new User({
-      email: "gettingold@mail.ru",
-      firstName: "Roman",
-      lastName: "Shabanov",
-      password,
-      pets: []
-    });
-
-    user.save();
-  }
+changeStream.on("change", change => {
+  console.group("Users collection");
+  console.log(change);
+  console.groupEnd();
 });
 
 export default User;

@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import { expressLogger } from "./utils/logger";
 import { PORT } from "./config/variables";
 
+import errorsMiddleware from "./middlewares/errors";
+
 import MongoDB from "./config/database";
 MongoDB();
 
@@ -12,7 +14,7 @@ const bodyParserURLEncoded = bodyParser.urlencoded({ extended: true });
 
 app.use(bodyParserJSON);
 app.use(bodyParserURLEncoded);
-app.use(expressLogger);
+// app.use(expressLogger);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -29,10 +31,10 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
-import userRotes from "./api/users/users.routes";
-import petsRotes from "./api/pets/pets.routes";
-app.use("/v1/users", userRotes);
-app.use("/v1/pets", petsRotes);
+import routesV1 from "./api/v1/routes";
+app.use("/v1", routesV1);
+
+app.use(errorsMiddleware);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}.`);

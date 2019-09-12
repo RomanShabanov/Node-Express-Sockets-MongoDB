@@ -17,10 +17,8 @@ export default async () => {
     useFindAndModify: false // Set to false to make findOneAndUpdate() and findOneAndRemove() use native findOneAndUpdate() rather than findAndModify()
   };
 
-  const mongoServer = new MongoMemoryServer();
-
   const connection_string = isTest
-    ? await mongoServer.getConnectionString()
+    ? await new MongoMemoryServer().getConnectionString()
     : MONGODB_URI;
 
   mongoose.connect(connection_string, mongooseOpts);

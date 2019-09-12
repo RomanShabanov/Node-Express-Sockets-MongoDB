@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import User, { IUser } from "./users.model";
-import { MONGODB_URI } from "../../config/variables";
+import { MONGODB_URI } from "../../../config/variables";
 
 describe("User model", () => {
   beforeAll(async () => {

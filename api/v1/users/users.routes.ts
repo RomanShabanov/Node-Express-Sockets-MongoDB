@@ -1,11 +1,13 @@
 import express, { Request, Response, NextFunction } from "express";
 
-import User from "./users.model";
+import { getUsers, getUserById } from "./users.controller";
 
 const Router = express.Router();
 
-Router.route("/").get((req: Request, res: Response, next: NextFunction) => {
-  User.find().then(users => {
+Router.route("/").get(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const users = await getUsers();
+
     res.status(200).json({
       payload: users,
       status: {
@@ -13,18 +15,21 @@ Router.route("/").get((req: Request, res: Response, next: NextFunction) => {
         code: 200
       }
     });
-  });
-});
+  }
+);
 
 Router.route("/:id").get(
   async (req: Request, res: Response, next: NextFunction) => {
-    const user_id = req.params.id;
+    const user = await getUserById(req.params.id);
 
-    console.log(user_id);
+    if (!user) {
+      return next({
+        code: 400,
+        message: "User is missing"
+      });
+    }
 
-    const user = await User.findById(user_id);
-
-    return res.status(200).json({
+    res.status(200).json({
       payload: user,
       status: {
         success: true,
