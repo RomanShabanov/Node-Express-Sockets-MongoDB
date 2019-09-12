@@ -1,12 +1,38 @@
 version: "3.3"
 services:
-  mongo:
+  mongo1:
+    hostname: mongo1
+    container_name: MongoDB-Primary
     image: mongo:latest
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0"]
     volumes:
       - db-data:/data/db
       - mongo-config:/data/configdb
+  mongo2:
+    hostname: mongo2
+    container_name: MongoDB-Secondary-1
+    image: mongo:latest
+    expose:
+      - 27017
     ports:
-      - 27017:27017
+      - 27018:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0"]
+  mongo3:
+    hostname: mongo3
+    container_name: MongoDB-Secondary-2
+    image: mongo:latest
+    expose:
+      - 27017
+    ports:
+      - 27019:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0"]
 volumes:
   db-data:
   mongo-config:

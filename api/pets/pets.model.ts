@@ -8,7 +8,19 @@ export interface IPet extends Document {
 
 const PetSchema: Schema = new Schema({
   name: { type: String, required: true },
-  owner: { type: Schema.Types.ObjectId, required: true }
+  owner: { type: Schema.Types.ObjectId }
 });
 
-export default mongoose.model<IPet>("Pet", PetSchema);
+const Pets = mongoose.model<IPet>("Pet", PetSchema);
+
+Pets.find().then(pets => {
+  if (!pets.length) {
+    Pets.create([
+      {
+        name: "Milana"
+      }
+    ]);
+  }
+});
+
+export default Pets;

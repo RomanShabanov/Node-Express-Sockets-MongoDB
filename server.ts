@@ -3,7 +3,8 @@ import bodyParser from "body-parser";
 import { expressLogger } from "./utils/logger";
 import { PORT } from "./config/variables";
 
-import "./config/database";
+import MongoDB from "./config/database";
+MongoDB();
 
 const app: Application = express();
 const bodyParserJSON = bodyParser.json();
@@ -29,7 +30,9 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 import userRotes from "./api/users/users.routes";
+import petsRotes from "./api/pets/pets.routes";
 app.use("/v1/users", userRotes);
+app.use("/v1/pets", petsRotes);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}.`);
