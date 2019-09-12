@@ -11,14 +11,10 @@ Step 2: Once asked enter root password to insert host entries into /etc/hosts
 Step 3: Confirm that localhost:27017 runs primary instance
 
 ```
-
+docker exec -it MongoDB-Primary mongo
+rs.isMaster().ismaster
+```
 
 ### DAO
 
 In the **Data Access Object** (DOA) layer, we can define the function which is directly connected to the database and fetch data and save data from and to the database.
-
-```
-
-```
-
-```
