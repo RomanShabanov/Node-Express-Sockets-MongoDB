@@ -16,7 +16,11 @@ export interface IUserModel extends Model<IUser> {
 }
 
 export const userSchema: Schema = new Schema({
-  email: { type: String, required: true, unique: true },
+  email: {
+    type: String,
+    required: [true, "Email is required."],
+    unique: [true, "Email is already taken."]
+  },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   password: { type: String, required: true, unique: true },

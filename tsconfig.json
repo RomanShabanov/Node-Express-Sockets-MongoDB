@@ -7,8 +7,9 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "build",
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
+      "utils/*": ["utils/*"],
       "*": ["node_modules/*"]
     }
   },

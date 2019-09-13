@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "Rest API",
-      script: "./server.ts",
+      script: "./src/server.ts",
       interpreter: "tsc",
       watch: true,
       ignore_watch: ["node_modules"],
