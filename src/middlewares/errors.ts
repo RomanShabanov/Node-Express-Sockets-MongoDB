@@ -1,26 +1,23 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, Router } from "express";
 
-interface IData {
-  code?: number;
-  message?: string;
-}
+import * as ErrorHandler from "../utils/ErrorHandler";
 
-export default (
-  { code = 400, message = "Data is missing." }: IData,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  res.status(code).json({
-    payload: {
-      error: true,
-      message
-    },
-    status: {
-      success: false,
-      code
-    }
+const handle404Error = (router: Router) => {
+  router.use((req: Request, res: Response) => {
+    ErrorHandler.notFoundError();
   });
-
-  next();
 };
+
+const handleClientError = (router: Router) => {
+  router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    ErrorHandler.clientError(err, res, next);
+  });
+};
+
+const handleServerError = (router: Router) => {
+  router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    ErrorHandler.serverError(err, res, next);
+  });
+};
+
+export default [handle404Error, handleClientError, handleServerError];

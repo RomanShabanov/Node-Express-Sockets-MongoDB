@@ -11,6 +11,7 @@ export const handleBodyRequestParsing = (router: Router) => {
   router.use(parser.json());
 };
 
+/** TODO: Compression should be handled by NGINX. Node is single-threaded and compression is CPU intensive task. */
 export const handleCompression = (router: Router) => {
   router.use(compression());
 };

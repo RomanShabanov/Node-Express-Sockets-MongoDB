@@ -15,6 +15,10 @@ docker exec -it MongoDB-Primary mongo
 rs.isMaster().ismaster
 ```
 
+Step 4: Enable certificates in Chrome
+
+`chrome://flags/#allow-insecure-localhost`
+
 ### DAO
 
 In the **Data Access Object** (DOA) layer, we can define the function which is directly connected to the database and fetch data and save data from and to the database.

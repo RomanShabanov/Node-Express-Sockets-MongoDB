@@ -1,12 +1,12 @@
 #!/bin/bash
 
-for i in 1 2 3
+for entry in "mongo1" "mongo2" "mongo3" "localserver.com"
 do
-  echo "Updating host entry: 127.0.0.1 mongo$i"
+  echo "Updating host entry: 127.0.0.1 $entry"
 
   # find existing instances in the host file and save the line numbers
-  matches_in_hosts="$(grep -n mongo$i /etc/hosts | cut -f1 -d:)"
-  host_entry="127.0.0.1 mongo$i"
+  matches_in_hosts="$(grep -n $entry /etc/hosts | cut -f1 -d:)"
+  host_entry="127.0.0.1 $entry"
   
   if [ ! -z "$matches_in_hosts" ]
     then

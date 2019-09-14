@@ -1,5 +1,21 @@
 version: "3.3"
 services:
+  # https://certbot.eff.org/lets-encrypt/osx-nginx
+  # https://dev.to/domysee/setting-up-a-reverse-proxy-with-nginx-and-docker-compose-29jg
+  #
+  #  nginx:
+  #    image: nginx:latest
+  #    container_name: production_nginx
+  #      - NGINX_HOST=foobar.com
+  #      - NGINX_PORT=80
+  #    volumes:
+  #      - ./nginx.conf:/etc/nginx/nginx.conf
+  #      - ./nginx/error.log:/etc/nginx/error_log.log
+  #      - ./nginx/cache/:/etc/nginx/cache
+  #      - /etc/letsencrypt/:/etc/letsencrypt/
+  #    ports:
+  #      - 80:80
+  #      - 443:443
   mongo1:
     hostname: mongo1
     container_name: MongoDB-Primary
