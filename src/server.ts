@@ -1,9 +1,10 @@
-import express, { Request, Response, NextFunction, Application } from "express";
+import express, { Application } from "express";
 import { expressLogger } from "./utils/logger";
 import { PORT, isProd } from "./config/variables";
 
-import errorsMiddleware from "./middlewares/errors";
-import commonMiddleware from "./middlewares/common";
+import errorsMiddleware from "./middlewares/errors.middleware";
+import commonMiddleware from "./middlewares/common.middleware";
+import routesMiddleware from "./middlewares/routes.middleware";
 
 import MongoDB from "./config/database";
 MongoDB();
@@ -20,10 +21,9 @@ process.on("unhandledRejection", e => {
 
 const app: Application = express();
 
-commonMiddleware.map(middleware => middleware(app));
-import routesV1 from "./services/v1/routes";
-app.use("/v1", routesV1);
-errorsMiddleware.map(middleware => middleware(app));
+commonMiddleware.map(common => common(app));
+routesMiddleware.map(routes => routes(app));
+errorsMiddleware.map(errors => errors(app));
 
 if (isProd) {
   app.use(expressLogger);

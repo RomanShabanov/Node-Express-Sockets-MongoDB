@@ -4,9 +4,9 @@
   "description": "Node.js Boilerplate: Express + MongoDB + Typescript + Socket.IO + pm2",
   "main": "src/server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"tsc -w\" \"nodemon dist/server.js\"",
-    "clean": "rimraf ./build/* && rimraf ./logs/*"
+    "clean": "rimraf ./build/* && rimraf ./logs/*",
+    "test": "jest --coverage --verbose"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,21 @@
     "url": "https://github.com/RomanShabanov/Node-Express-Sockets-MongoDB/issues"
   },
   "homepage": "https://github.com/RomanShabanov/Node-Express-Sockets-MongoDB#readme",
+  "jest": {
+    "verbose": true,
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "dependencies": {
     "@types/body-parser": "^1.17.1",
     "@types/express": "^4.17.1",
@@ -40,10 +55,12 @@
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "express-pino-logger": "^4.0.0",
+    "express-session": "^1.16.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.10",
     "pino": "^5.13.2",
     "socket.io": "^2.2.0",
+    "swagger-ui-express": "^4.1.0",
     "ts-node": "^8.3.0",
     "validator": "^11.1.0",
     "winston": "^3.2.1"
@@ -53,18 +70,22 @@
     "@types/compression": "^1.0.1",
     "@types/cors": "^2.8.6",
     "@types/express-pino-logger": "^4.0.0",
+    "@types/express-session": "^1.15.14",
     "@types/mongoose": "^5.5.13",
     "@types/node": "^12.7.2",
     "@types/pino": "^5.8.9",
+    "@types/swagger-ui-express": "^3.0.1",
     "@types/validator": "^10.11.3",
     "chai": "^4.2.0",
     "concurrently": "^4.1.2",
+    "jest": "^24.9.0",
     "mocha": "^6.2.0",
     "mongodb-memory-server": "^5.2.0",
     "nodemon": "^1.19.1",
     "pm2": "^3.5.1",
     "rimraf": "^3.0.0",
     "supertest": "^4.0.2",
+    "ts-jest": "^24.1.0",
     "tslint": "^5.19.0",
     "tslint-consistent-codestyle": "^1.15.1",
     "tslint-defocus": "^2.0.6",
