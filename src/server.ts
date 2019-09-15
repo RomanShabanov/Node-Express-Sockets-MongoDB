@@ -1,6 +1,5 @@
 import express, { Application } from "express";
-import { expressLogger } from "./utils/logger";
-import { PORT, isProd } from "./config/variables";
+import http from "http";
 
 import errorsMiddleware from "./middlewares/errors.middleware";
 import commonMiddleware from "./middlewares/common.middleware";
@@ -25,12 +24,9 @@ commonMiddleware.map(common => common(app));
 routesMiddleware.map(routes => routes(app));
 errorsMiddleware.map(errors => errors(app));
 
-if (isProd) {
-  app.use(expressLogger);
-}
+const { PORT = 3000 } = process.env;
 
-app.listen(PORT, () => {
-  console.log(
-    `Server listening on port ${PORT}. Go to http://localhost:${PORT}/`
-  );
-});
+const server = http.createServer(app);
+server.listen(PORT, () =>
+  console.log(`Server is running http://localhost:${PORT}`)
+);

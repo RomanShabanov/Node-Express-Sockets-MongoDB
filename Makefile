@@ -1,14 +1,9 @@
 all: start-mongo-rs secure-connection
 
-letsencrypt:
-	@echo "Install Let's encrypt"
-	@brew install letsencrypt
-	@sudo certbot --standalone -d server.url
-
-letsencrypt-renew:
-	@echo 'Renew certificates'
-	@docker-compose -f ./docker-compose.yml down
-	@certbot renew --pre-hook "docker-compose -f path/to/docker-compose.yml down" --post-hook "docker-compose -f path/to/docker-compose.yml up -d"
+issue-certificate:
+	@sudo openssl genrsa -out ./security/localhost.key 2048
+	@sudo openssl req -new -x509 -key ./security/localhost.key -out ./security/localhost.crt -days 3650 -subj /CN=localhost
+	@sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ./security/localhost.crt
 
 MONGO_SCRIPT := $(shell cat ./replica_set.config)
 
