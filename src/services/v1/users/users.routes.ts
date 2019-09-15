@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 
 import { getUsers, getUserById, createUser } from "./users.controller";
+import { checkMongoId } from "../../../middlewares/checks.middleware";
 
 const Router = express.Router();
 
@@ -40,6 +41,7 @@ Router.route("/")
   });
 
 Router.route("/:id").get(
+  checkMongoId,
   async (req: Request, res: Response, next: NextFunction) => {
     const user = await getUserById(req.params.id);
 

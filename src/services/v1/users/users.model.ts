@@ -1,13 +1,13 @@
 import mongoose, { Schema, Document, Types, Model } from "mongoose";
 import * as bcrypt from "bcrypt";
 import { IPet } from "../pets/pets.model";
-import validator from "validator";
 
 export interface IUser extends Document {
   email: string;
   firstName: string;
   lastName: string;
   password: string;
+  permissions: string[];
   pets: Types.DocumentArray<IPet>;
   comparePassword(password: string): boolean;
 }
@@ -32,7 +32,8 @@ export const userSchema: Schema = new Schema(
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     password: { type: String, required: true },
-    pets: { type: Array }
+    pets: { type: Array },
+    permissions: { type: Array }
   },
   { timestamps: true }
 );
