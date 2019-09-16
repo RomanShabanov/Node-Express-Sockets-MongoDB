@@ -16,6 +16,11 @@ services:
   #    ports:
   #      - 80:80
   #      - 443:443
+  redis:
+    image: redis
+    container_name: Redis-Cache
+    expose:
+      - 6379
   mongo1:
     hostname: mongo1
     container_name: MongoDB-Primary
