@@ -1,0 +1,3 @@
+tasks:
+  - init: yarn install && make
+    command: yarn run dev

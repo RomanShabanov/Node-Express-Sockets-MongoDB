@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/RomanShabanov/Node-Express-Sockets-MongoDB)
+
 # Node.js Boilerplate: Express + MongoDB + Typescript + Socket.IO + pm2
 
 ## Development
